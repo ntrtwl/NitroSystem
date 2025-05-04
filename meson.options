@@ -1,1 +1,2 @@
 option('mwrap_ver', type : 'string', value : 'default', description : 'Version of Metrowerks toolchain to use')
+option('mwrap_sdk', type : 'string', value : 'default', description : 'Version of Metrowerks libraries to use')
