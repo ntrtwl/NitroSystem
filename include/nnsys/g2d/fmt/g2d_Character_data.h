@@ -56,14 +56,14 @@ typedef enum NNSG2dCharacterFmt {
     NNS_G2D_CHARACTER_FMT_MAX
 } NNSG2dCharacterFmt;
 
-typedef enum NNSG2dCharacterDataMapingType {
-    NNS_G2D_CHARACTERMAPING_1D_32,
-    NNS_G2D_CHARACTERMAPING_1D_64,
-    NNS_G2D_CHARACTERMAPING_1D_128,
-    NNS_G2D_CHARACTERMAPING_1D_256,
-    NNS_G2D_CHARACTERMAPING_2D,
-    NNS_G2D_CHARACTERMAPING_MAX
-} NNSG2dCharacterDataMapingType;
+typedef enum NNSG2dCharacterDataMappingType {
+    NNS_G2D_CHARACTERMAPPING_1D_32,
+    NNS_G2D_CHARACTERMAPPING_1D_64,
+    NNS_G2D_CHARACTERMAPPING_1D_128,
+    NNS_G2D_CHARACTERMAPPING_1D_256,
+    NNS_G2D_CHARACTERMAPPING_2D,
+    NNS_G2D_CHARACTERMAPPING_MAX
+} NNSG2dCharacterDataMappingType;
 
 typedef enum NNSG2dPaletteFmt {
     NNS_G2D_NNSG2DPALETTEFMT_16X16,
@@ -99,7 +99,7 @@ typedef struct NNSG2dCharacterData {
     u16 H;
     u16 W;
     GXTexFmt pixelFmt;
-    GXOBJVRamModeChar mapingType;
+    GXOBJVRamModeChar mappingType;
     u32 characterFmt;
     u32 szByte;
     void * pRawData;

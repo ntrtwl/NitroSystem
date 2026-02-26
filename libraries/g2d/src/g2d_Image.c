@@ -67,7 +67,7 @@ static NNS_G2D_INLINE void CopyCharDataToImageAttr_ (const NNSG2dCharacterData *
     NNS_G2D_NULL_ASSERT(pSrc);
     NNS_G2D_NULL_ASSERT(pDst);
 
-    if (pSrc->mapingType == GX_OBJVRAMMODE_CHAR_2D) {
+    if (pSrc->mappingType == GX_OBJVRAMMODE_CHAR_2D) {
         pDst->sizeS = (GXTexSizeS)(GetPow_(pSrc->W));
         pDst->sizeT = (GXTexSizeT)(GetPow_(pSrc->H));
     } else {
@@ -82,7 +82,7 @@ static NNS_G2D_INLINE void CopyCharDataToImageAttr_ (const NNSG2dCharacterData *
     pDst->fmt = pSrc->pixelFmt;
     pDst->bExtendedPlt = FALSE;
     pDst->plttUse = GX_TEXPLTTCOLOR0_TRNS;
-    pDst->mappingType = pSrc->mapingType;
+    pDst->mappingType = pSrc->mappingType;
 }
 
 static NNS_G2D_INLINE void DoLoadingToVram_ (const NNSG2dCharacterData * pSrcData, u32 baseAddr, NNS_G2D_VRAM_TYPE type)
@@ -135,7 +135,7 @@ static BOOL IsValidDataSize_ (const NNSG2dCharacterData * pSrcData, NNS_G2D_VRAM
     if (vramType == NNS_G2D_VRAM_TYPE_3DMAIN) {
         return TRUE;
     } else {
-        switch (pSrcData->mapingType)
+        switch (pSrcData->mappingType)
         {
         case GX_OBJVRAMMODE_CHAR_2D:
             return (BOOL)(pSrcData->szByte <= 32 * 1024);
@@ -317,12 +317,12 @@ void NNS_G2dLoadImage1DMapping (const NNSG2dCharacterData * pSrcData, u32 baseAd
 {
     NNS_G2D_NULL_ASSERT(pSrcData);
     NNS_G2D_NULL_ASSERT(pImgProxy);
-    NNS_G2D_ASSERTMSG(IsValid1DMappingType_(type, pSrcData->mapingType),
+    NNS_G2D_ASSERTMSG(IsValid1DMappingType_(type, pSrcData->mappingType),
                       "Invalid mapping-type.");
     NNS_G2D_ASSERTMSG(IsValidDataSize_(pSrcData, type),
                       "Invalid data size for the mapping-type.");
 
-    SetOBJVRamModeCharacterMapping_(type, pSrcData->mapingType);
+    SetOBJVRamModeCharacterMapping_(type, pSrcData->mappingType);
 
     DoLoadingToVram_(pSrcData, baseAddr, type);
 
@@ -333,11 +333,11 @@ void NNS_G2dLoadImage2DMapping (const NNSG2dCharacterData * pSrcData, u32 baseAd
 {
     NNS_G2D_NULL_ASSERT(pSrcData);
     NNS_G2D_NULL_ASSERT(pImgProxy);
-    NNS_G2D_ASSERT(pSrcData->mapingType == GX_OBJVRAMMODE_CHAR_2D);
+    NNS_G2D_ASSERT(pSrcData->mappingType == GX_OBJVRAMMODE_CHAR_2D);
     NNS_G2D_ASSERTMSG(IsValidDataSize_(pSrcData, type),
                       "Invalid data size for the mapping-type.");
 
-    SetOBJVRamModeCharacterMapping_(type, pSrcData->mapingType);
+    SetOBJVRamModeCharacterMapping_(type, pSrcData->mappingType);
 
     DoLoadingToVram_(pSrcData, baseAddr, type);
 
@@ -346,7 +346,7 @@ void NNS_G2dLoadImage2DMapping (const NNSG2dCharacterData * pSrcData, u32 baseAd
 
 void NNS_G2dLoadImageVramTransfer (const NNSG2dCharacterData * pSrcData, u32 baseAddr, NNS_G2D_VRAM_TYPE type, NNSG2dImageProxy * pImgProxy)
 {
-    NNS_G2D_MINMAX_ASSERT(pSrcData->mapingType,
+    NNS_G2D_MINMAX_ASSERT(pSrcData->mappingType,
                           GX_OBJVRAMMODE_CHAR_1D_32K,
                           GX_OBJVRAMMODE_CHAR_1D_256K);
 
@@ -355,7 +355,7 @@ void NNS_G2dLoadImageVramTransfer (const NNSG2dCharacterData * pSrcData, u32 bas
 
     DC_FlushRange(pSrcData->pRawData, pSrcData->szByte);
 
-    SetOBJVRamModeCharacterMapping_(type, pSrcData->mapingType);
+    SetOBJVRamModeCharacterMapping_(type, pSrcData->mappingType);
 
     CopyCharDataToImageAttr_(pSrcData, &pImgProxy->attr);
 

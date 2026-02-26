@@ -79,7 +79,7 @@ typedef struct NNSG2dCellDataBank {
     u16 numCells;
     u16 cellBankAttr;
     NNSG2dCellData * pCellDataArrayHead;
-    NNSG2dCharacterDataMapingType mappingMode;
+    NNSG2dCharacterDataMappingType mappingMode;
     NNSG2dVramTransferData * pVramTransferData;
     void * pStringBank;
     void * pExtendedData;
