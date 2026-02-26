@@ -25,7 +25,7 @@ static const char * StrNNSG2dCharacterOrder_ [] = {
     "NNS_G2D_CHARACTER_FMT_MAX"
 };
 
-static const char * GetStrNNSG2dCharacterDataMapingType_ (GXOBJVRamModeChar type)
+static const char * GetStrNNSG2dCharacterDataMappingType_ (GXOBJVRamModeChar type)
 {
     switch (type) {
     case GX_OBJVRAMMODE_CHAR_2D:
@@ -82,11 +82,11 @@ void NNS_G2dUnpackNCG (NNSG2dCharacterData * pCharData)
     pCharData->pRawData = NNS_G2D_UNPACK_OFFSET_PTR(pCharData->pRawData, pCharData);
 
     NNS_G2D_MINMAX_ASSERT(pCharData->pixelFmt, GX_TEXFMT_PLTT16, GX_TEXFMT_PLTT256);
-    NNS_G2D_MINMAX_ASSERT(pCharData->mapingType, GX_OBJVRAMMODE_CHAR_2D, GX_OBJVRAMMODE_CHAR_1D_256K);
+    NNS_G2D_MINMAX_ASSERT(pCharData->mappingType, GX_OBJVRAMMODE_CHAR_2D, GX_OBJVRAMMODE_CHAR_1D_256K);
     NNS_G2D_MINMAX_ASSERT(NNSi_G2dGetCharacterFmtType(pCharData->characterFmt), NNS_G2D_CHARACTER_FMT_CHAR, NNS_G2D_CHARACTER_FMT_MAX);
 
     if ((pCharData->characterFmt == NNS_G2D_CHARACTER_FMT_CHAR)
-        && (pCharData->mapingType == GX_OBJVRAMMODE_CHAR_2D)) {
+        && (pCharData->mappingType == GX_OBJVRAMMODE_CHAR_2D)) {
         NNS_G2D_ASSERTMSG((pCharData->pixelFmt == GX_TEXFMT_PLTT16 &&
                            pCharData->W == 32) ||
                           (pCharData->pixelFmt == GX_TEXFMT_PLTT256 &&
@@ -165,7 +165,7 @@ void NNS_G2dUnpackBGNCG (NNSG2dCharacterData * pCharData)
     pCharData->pRawData = NNS_G2D_UNPACK_OFFSET_PTR(pCharData->pRawData, pCharData);
 
     NNS_G2D_MINMAX_ASSERT(pCharData->pixelFmt, GX_TEXFMT_PLTT16, GX_TEXFMT_PLTT256);
-    NNS_G2D_MINMAX_ASSERT(pCharData->mapingType, GX_OBJVRAMMODE_CHAR_2D, GX_OBJVRAMMODE_CHAR_1D_256K);
+    NNS_G2D_MINMAX_ASSERT(pCharData->mappingType, GX_OBJVRAMMODE_CHAR_2D, GX_OBJVRAMMODE_CHAR_1D_256K);
     NNS_G2D_ASSERT(NNSi_G2dGetCharacterFmtType(pCharData->characterFmt) == NNS_G2D_CHARACTER_FMT_CHAR);
 
     NNSI_G2D_DEBUGMSG0("Unpacking NCGR file is successful.\n");
@@ -197,7 +197,7 @@ void NNS_G2dPrintCharacterData (const NNSG2dCharacterData * pCharData)
         }
 
         OS_Printf(" pixelFmt       = %s \n", StrNNSG2dPixelFmt_[ pCharData->pixelFmt ]);
-        OS_Printf(" mapingType     = %s \n", GetStrNNSG2dCharacterDataMapingType_(pCharData->mapingType));
+        OS_Printf(" mapingType     = %s \n", GetStrNNSG2dCharacterDataMappingType_(pCharData->mappingType));
         OS_Printf(" characterFmt   = %s \n", StrNNSG2dCharacterOrder_[ charFmt ]);
         OS_Printf(" isVramTransfer = %d \n", NNSi_G2dIsCharacterVramTransfered(pCharData->characterFmt));
         OS_Printf("---------------------------------------------\n");
