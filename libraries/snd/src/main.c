@@ -104,7 +104,7 @@ void NNS_SndStopChannelAll (void)
 BOOL NNS_SndUpdateDriverInfo (void)
 {
     if (!sDriverInfoFirstFlag) {
-        while (SND_RecvCommandReply(SND_COMMAND_NOBLOCK) != NULL) {
+        while (SND_RecvCommandReply(SND_COMMAND_NOBLOCK) != 0) {
         }
 
         if (!SND_IsFinishedCommandTag(sDriverInfoCommandTag)) {
@@ -139,7 +139,7 @@ BOOL NNS_SndReadDriverChannelInfo (int chNo, SNDChannelInfo * info)
     NNS_NULL_ASSERT(info);
 
     driverInfo = GetCurDriverInfo();
-    if (driverInfo == NULL) return FALSE;
+    if (driverInfo == 0) return FALSE;
 
     return SND_ReadChannelInfo(driverInfo, chNo, info);
 }
@@ -151,7 +151,7 @@ BOOL NNSi_SndReadDriverPlayerInfo (int playerNo, SNDPlayerInfo * info)
     NNS_NULL_ASSERT(info);
 
     driverInfo = GetCurDriverInfo();
-    if (driverInfo == NULL) return FALSE;
+    if (driverInfo == 0) return FALSE;
 
     return SND_ReadPlayerInfo(driverInfo, playerNo, info);
 }
@@ -163,7 +163,7 @@ BOOL NNSi_SndReadDriverTrackInfo (int playerNo, int trackNo, SNDTrackInfo * info
     NNS_NULL_ASSERT(info);
 
     driverInfo = GetCurDriverInfo();
-    if (driverInfo == NULL) return FALSE;
+    if (driverInfo == 0) return FALSE;
 
     return SND_ReadTrackInfo(driverInfo, playerNo, trackNo, info);
 }
